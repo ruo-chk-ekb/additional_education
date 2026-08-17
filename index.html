@@ -4,10 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Качество дополнительного образования — Чкаловский район</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
+@font-face{font-family:'Golos Text';font-style:normal;font-weight:400;font-display:swap;src:url('vendor/fonts/golos-text-cyrillic-400-normal.woff2') format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Golos Text';font-style:normal;font-weight:500;font-display:swap;src:url('vendor/fonts/golos-text-cyrillic-500-normal.woff2') format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Golos Text';font-style:normal;font-weight:600;font-display:swap;src:url('vendor/fonts/golos-text-cyrillic-600-normal.woff2') format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Golos Text';font-style:normal;font-weight:700;font-display:swap;src:url('vendor/fonts/golos-text-cyrillic-700-normal.woff2') format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Golos Text';font-style:normal;font-weight:400;font-display:swap;src:url('vendor/fonts/golos-text-latin-400-normal.woff2') format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD}
+@font-face{font-family:'Golos Text';font-style:normal;font-weight:500;font-display:swap;src:url('vendor/fonts/golos-text-latin-500-normal.woff2') format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD}
+@font-face{font-family:'Golos Text';font-style:normal;font-weight:600;font-display:swap;src:url('vendor/fonts/golos-text-latin-600-normal.woff2') format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD}
+@font-face{font-family:'Golos Text';font-style:normal;font-weight:700;font-display:swap;src:url('vendor/fonts/golos-text-latin-700-normal.woff2') format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:400;font-display:swap;src:url('vendor/fonts/unbounded-cyrillic-400-normal.woff2') format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:swap;src:url('vendor/fonts/unbounded-cyrillic-600-normal.woff2') format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:800;font-display:swap;src:url('vendor/fonts/unbounded-cyrillic-800-normal.woff2') format('woff2');unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:400;font-display:swap;src:url('vendor/fonts/unbounded-latin-400-normal.woff2') format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:600;font-display:swap;src:url('vendor/fonts/unbounded-latin-600-normal.woff2') format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD}
+@font-face{font-family:'Unbounded';font-style:normal;font-weight:800;font-display:swap;src:url('vendor/fonts/unbounded-latin-800-normal.woff2') format('woff2');unicode-range:U+0000-00FF,U+2000-206F,U+20AC,U+2122,U+2212,U+FEFF,U+FFFD}
 :root{
   --bg:#f4f3ef; --card:#ffffff; --ink:#20242e; --muted:#68717f; --line:rgba(32,36,46,.12);
   --accent:#6f4f9e; --accent-ink:#6f4f9e; --accent-soft:rgba(111,79,158,.12);
@@ -457,10 +468,10 @@ table.adm td button{border:none;background:none;font-size:.95rem;margin-right:.3
 /* ---------- constants ---------- */
 var ADMIN_LOGIN='Admin', ADMIN_PASS='ChkaDO-2026#';
 var LS_KEY='chkdo_dashboard_v1', LS_THEME='chkdo_theme', LS_LV='chkdo_lv';
-var ECHARTS_URL='https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js';
-var XLSX_URL='https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
-var JSPDF_URL='https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js';
-var H2C_URL='https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+var ECHARTS_URL='vendor/echarts.min.js';
+var XLSX_URL='vendor/xlsx.full.min.js';
+var JSPDF_URL='vendor/jspdf.umd.min.js';
+var H2C_URL='vendor/html2canvas.min.js';
 var ORG_COLORS=['#6f4f9e','#3e8f8a','#d9a441','#3f9e63'];
 
 var FIELDS=[
