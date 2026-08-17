@@ -215,7 +215,6 @@ table.adm td button{border:none;background:none;font-size:.95rem;margin-right:.3
   <section class="filters">
     <label>Период <select id="periodSel"></select></label>
     <span class="chip" id="chipOrgs">организаций: —</span>
-    <span class="chip ghost">портрет системы · организации не сравниваются между собой</span>
   </section>
 
   <div id="empty" hidden>
@@ -246,21 +245,21 @@ table.adm td button{border:none;background:none;font-size:.95rem;margin-right:.3
         <div class="dcard"><div id="chProg" class="chart sm"></div><div class="dcap" id="capProg"></div></div>
         <div class="dcard"><div id="chPob" class="chart sm"></div><div class="dcap" id="capPob"></div></div>
       </div>
-      <p class="note">Доли показывают устройство системы, а не места организаций: сравнение «кто лучше» не выполняется.</p>
+      <p class="note">Контингент, программы и результаты.</p>
     </section>
 
     <section class="block rv" id="b03">
       <div class="bhead"><div class="bnum">03</div>
-        <div><h2>Программы и потенциал</h2><p>Район в целом против редактируемых ориентиров: доступность, содержание, кадры, открытость</p></div>
+        <div><h2>Программы и потенциал</h2><p>Сводный профиль района в сопоставлении с целевыми ориентирами: доступность, содержание, кадры, открытость</p></div>
       </div>
       <div class="b3grid">
         <div>
           <div id="chRadar" class="chart lg"></div>
-          <p class="note">100 = ориентир достигнут. Ориентиры настраиваются в админ-панели (вкладка «Ориентиры и пороги»).</p>
+          <p class="note">100% — целевой ориентир по показателю достигнут.</p>
         </div>
         <div>
           <div id="bm" class="bm"></div>
-          <p class="note">Цвет — степень достижения ориентира (жёлтый → салатовый → зелёный). Красный используется только для абсолютных порогов тревог.</p>
+          <p class="note">Фактические значения показателей — в сопоставлении с целевыми ориентирами района.</p>
         </div>
       </div>
     </section>
@@ -272,7 +271,7 @@ table.adm td button{border:none;background:none;font-size:.95rem;margin-right:.3
       <div class="staff-grid">
         <div>
           <div id="chKval" class="chart md"></div>
-          <p class="note">Структура аттестации педагогов, среднее по двум ДДТ. Численность педагогов в данных отсутствует, поэтому взвешивание не применяется.</p>
+          <p class="note">Структура аттестации и ключевые кадровые показатели.</p>
         </div>
         <div id="staffChips" class="schips"></div>
       </div>
@@ -283,7 +282,7 @@ table.adm td button{border:none;background:none;font-size:.95rem;margin-right:.3
         <div><h2>Результаты и открытость</h2><p>Конкурсное движение, цифровая открытость, инфраструктура и сетевое взаимодействие</p></div>
       </div>
       <div class="res-grid">
-        <div class="rcard"><div id="chGauge" class="chart md"></div><div class="rcap">Успешность участия в конкурсах (взвешено по числу победителей)</div></div>
+        <div class="rcard"><div id="chGauge" class="chart md"></div><div class="rcap">Успешность участия в конкурсных мероприятиях</div></div>
         <div class="rcard"><div class="big-num" id="pob100">—</div><div class="rcap">побед на 100 обучающихся</div></div>
         <div class="rcard">
           <div class="otkr-bar"><i id="otkrBar" style="width:0"></i></div>
@@ -295,7 +294,7 @@ table.adm td button{border:none;background:none;font-size:.95rem;margin-right:.3
 
     <section class="block rv" id="b06">
       <div class="bhead"><div class="bnum">06</div>
-        <div><h2>Наблюдения и точки роста</h2><p>Мягкие сигналы по системе в целом: сильные стороны, резервы, качество данных. Не оценки организаций.</p></div>
+        <div><h2>Наблюдения и точки роста</h2><p>Сильные стороны, резервы развития и полнота данных по системе дополнительного образования района.</p></div>
       </div>
       <div id="signals" class="signals"></div>
     </section>
@@ -675,7 +674,7 @@ function renderCards(){
     {t:'Обучающиеся',v:fmt(a.deti),s:strip('deti',a.deti),c:byOrg('deti')},
     {t:'Реализуемые программы',v:fmt(a.programmy),s:strip('programmy',a.programmy),c:byOrg('programmy')},
     {t:'Победители конкурсов',v:fmt(a.pobediteli),s:strip('pobediteli',a.pobediteli),c:byOrg('pobediteli')},
-    {t:'Средний НОКО',v:fmt(a.nokoW,1),c:'взвешено по контингенту · '+byOrg('noko')},
+    {t:'Средний НОКО',v:fmt(a.nokoW,1),c:byOrg('noko')},
     {t:'Соц.сертификат ПФДО',v:fmt(a.sertPct,1)+'%',c:'≈ '+fmt(a.sertDeti)+' детей · ориентир '+fmt(state.targets.sertifikat,0)+'%'},
     {t:'Доходы от платных услуг',v:fmt(a.platnye,1)+' млн ₽',c:fmt(a.platPerChild,0)+' ₽ на обучающегося'},
     {t:'Подписчики ВК',v:fmt(a.vk),c:'≈ '+fmt(a.vkPct,0)+'% контингента'}
@@ -714,7 +713,7 @@ function renderResults(){
   var rows=[
     ['Оснащённость помещений',fmt(a.osnashM,0)+'%'],
     ['Спецоборудование','в '+a.specCount+' из '+a.n+' ДДТ'],
-    ['Сетевые партнёры',a.partnersNA>0?fmt(a.partnersSum)+' · данные у '+a.partnersKnown+' из '+a.n:fmt(a.partnersSum)],
+    ['Сетевые партнёры',fmt(a.partnersSum)],
     ['Программ на 1000 детей',fmt(a.deti?a.programmy/a.deti*1000:null,1)]
   ];
   $('infra').innerHTML=rows.map(function(r){return '<div><span>'+r[0]+'</span><b>'+r[1]+'</b></div>';}).join('');
@@ -742,7 +741,13 @@ function renderSignals(){
   if(a.molodyeM!=null&&a.vkkM!=null&&a.molodyeM>=40&&a.vkkM<60)
     S.push({cls:'sig-grow',tag:'Кадры',text:'Молодые без категории: доля молодых специалистов '+fmt(a.molodyeM,0)+'% при доле ВКК '+fmt(a.vkkM,0)+'% — сопровождение аттестации и внутренние наставнические пары в командах.'});
   if(a.partnersNA>0)
-    S.push({cls:'sig-data',tag:'Данные',text:'Сетевое взаимодействие: показатель заявлен у '+a.partnersKnown+' из '+a.n+' ДДТ — дополнить следующий срез.'});
+    var netRows=rows.filter(function(r){return isNum(r.v.partnery);});
+  var netNA=rows.filter(function(r){return !isNum(r.v.partnery);});
+  if(netRows.length){
+    var netTxt='Сетевое взаимодействие реализуется: '+netRows.map(function(r){return esc(r.name)+' (партнёры: '+fmt(r.v.partnery)+')';}).join('; ')+'.';
+    if(netNA.length)netTxt+=' По '+netNA.map(function(r){return esc(r.name);}).join(', ')+' сведения не представлены.';
+    S.push({cls:'sig-data',tag:'Сетевое взаимодействие',text:netTxt});
+  }
   $('signals').innerHTML=S.map(function(s){
     return '<div class="sig '+s.cls+'"><span class="tag">'+s.tag+'</span><p>'+s.text+'</p></div>';
   }).join('');
@@ -807,7 +812,7 @@ function renderCharts(){
         splitArea:{areaStyle:{color:['rgba(0,0,0,0)','rgba(0,0,0,0)']}},
         axisLine:{lineStyle:{color:pal.split}}},
       series:[
-        {name:'Район (факт)',type:'radar',color:'#6f4f9e',symbol:'circle',symbolSize:5,
+        {name:'Ориентиры',type:'radar',color:'#6f4f9e',symbol:'circle',symbolSize:5,
           lineStyle:{width:2.5,color:'#6f4f9e'},itemStyle:{color:'#6f4f9e'},
           areaStyle:{color:'rgba(111,79,158,.22)'},data:[{value:facts}]},
         {name:'Ориентиры',type:'radar',color:'#d9a441',symbol:'none',
