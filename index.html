@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Качество дополнительного образования — Чкаловский район</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&family=Unbounded:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f4f3ef; --card:#ffffff; --ink:#20242e; --muted:#68717f; --line:rgba(32,36,46,.12);
+  --accent:#6f4f9e; --accent-ink:#6f4f9e; --accent-soft:rgba(111,79,158,.12);
+  --teal:#3e8f8a; --gold:#d9a441; --lime:#a3d06a; --green:#3f9e63; --red:#d64545; --gray:#b9bec8;
+  --shadow:0 10px 30px rgba(24,26,34,.08);
+}
+html[data-theme="dark"]{
+  --bg:#14161b; --card:#1d2027; --ink:#e9ebf0; --muted:#9aa2b1; --line:rgba(233,235,240,.13);
+  --accent:#a183d8; --accent-ink:#b298e2; --accent-soft:rgba(161,131,216,.16);
+  --teal:#5cb2ab; --gold:#e0b25f; --lime:#a3d06a; --green:#5cb97f; --red:#e06c6c; --gray:#5d6472;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+[hidden]{display:none !important}
+html{font-size:16px;scroll-behavior:smooth}
+html.lv{font-size:19px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Golos Text',system-ui,sans-serif;line-height:1.45}
+button{font-family:inherit;cursor:pointer}
+h1,h2,h3{font-family:'Unbounded','Golos Text',sans-serif;margin:0}
+.wrap{max-width:72rem;margin:0 auto;padding:0 1.25rem}
+
+/* ---------- diagnostics ---------- */
+#diag{position:fixed;z-index:200;top:0;left:0;right:0;background:#d64545;color:#fff;padding:.7rem 1.2rem;font-size:.9rem;line-height:1.4}
+#diag b{font-weight:700}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:90;background:var(--card);border-bottom:1px solid var(--line);box-shadow:0 4px 18px rgba(20,22,30,.05);transition:padding .25s}
+.hdr-in{max-width:72rem;margin:0 auto;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:.85rem;min-width:0}
+.logo{display:grid;grid-template-columns:1fr 1fr;gap:.22rem;width:2.1rem;height:2.1rem;flex:none}
+.logo i{border-radius:.3rem;display:block}
+.hdr-title{font-family:'Unbounded';font-weight:800;font-size:1.06rem;letter-spacing:.01em}
+.hdr-sub{color:var(--muted);font-size:.8rem;margin-top:.1rem}
+.hdr-btns{display:flex;gap:.5rem;align-items:center;flex-wrap:wrap}
+.hdr-btns button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:.7rem;padding:.5rem .8rem;font-size:.85rem;font-weight:600;transition:transform .15s,border-color .15s}
+.hdr-btns button:hover{transform:translateY(-1px);border-color:var(--accent)}
+.hdr-btns button.accent{background:var(--accent);border-color:var(--accent);color:#fff}
+@media (max-width:720px){
+  header.scrolled .hdr-sub{display:none}
+  header.scrolled .hdr-in{padding:.45rem 1rem}
+  header.scrolled .hdr-title{font-size:.9rem}
+}
+
+/* ---------- content ---------- */
+#content{max-width:72rem;margin:0 auto;padding:1.25rem}
+.filters{display:flex;gap:.6rem;align-items:center;flex-wrap:wrap;margin:.25rem 0 1.25rem}
+.filters label{font-size:.85rem;color:var(--muted);display:flex;gap:.5rem;align-items:center}
+.filters select{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:.6rem;padding:.45rem .6rem;font-size:.85rem;font-family:inherit}
+.chip{display:inline-block;background:var(--accent-soft);color:var(--accent-ink);border-radius:99px;padding:.3rem .75rem;font-size:.78rem;font-weight:600}
+.chip.ghost{background:transparent;border:1px dashed var(--line);color:var(--muted);font-weight:500}
+
+.block{background:var(--card);border:1px solid var(--line);border-radius:1.1rem;box-shadow:var(--shadow);padding:1.6rem 1.6rem 1.8rem;margin-bottom:1.4rem;position:relative;overflow:hidden}
+.block::before{content:'';position:absolute;left:0;top:0;bottom:0;width:.28rem;background:var(--accent)}
+.bhead{display:flex;gap:1rem;align-items:flex-start;margin-bottom:1.2rem}
+.bnum{font-family:'Unbounded';font-weight:800;font-size:1.7rem;color:var(--accent-ink);line-height:1;min-width:3rem}
+.bhead h2{font-size:1.08rem;font-weight:600;letter-spacing:.01em}
+.bhead p{margin:.3rem 0 0;color:var(--muted);font-size:.85rem}
+.note{color:var(--muted);font-size:.78rem;margin:.8rem 0 0}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.rv.in{opacity:1;transform:none}
+html.pdf-mode .rv{opacity:1 !important;transform:none !important}
+
+/* ---------- 01 KPI ---------- */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(13.5rem,1fr));gap:.9rem}
+.kpi{border:1px solid var(--line);border-radius:.85rem;padding:.95rem 1rem;position:relative;background:var(--card)}
+.kpi::before{content:'';position:absolute;left:0;top:.9rem;bottom:.9rem;width:.22rem;border-radius:2px;background:var(--accent)}
+.kpi-t{font-size:.75rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.kpi-v{font-family:'Unbounded';font-weight:800;font-size:1.65rem;margin:.35rem 0 .45rem}
+.kpi-c{font-size:.75rem;color:var(--muted);margin-top:.45rem}
+.cstrip{display:flex;height:.5rem;border-radius:99px;overflow:hidden;background:var(--accent-soft)}
+.cstrip span{display:block;height:100%}
+
+/* ---------- 02 donuts ---------- */
+.donuts{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));gap:1rem}
+.dcard{border:1px solid var(--line);border-radius:.85rem;padding:.8rem}
+.dcap{text-align:center;font-size:.8rem;color:var(--muted);margin-top:.2rem}
+
+/* ---------- 03 radar + benchmark ---------- */
+.b3grid{display:grid;grid-template-columns:1.15fr 1fr;gap:1.4rem;align-items:start}
+@media (max-width:860px){.b3grid{grid-template-columns:1fr}}
+.bm{display:grid;grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr));gap:.7rem}
+.bm-cell{border:1px solid var(--line);border-radius:.8rem;padding:.75rem .8rem}
+.bm-t{font-size:.72rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.bm-v{font-family:'Unbounded';font-weight:700;font-size:1.05rem;margin:.25rem 0 .1rem}
+.bm-v span{font-family:'Golos Text';font-weight:500;font-size:.72rem;color:var(--muted)}
+.bm-bar{height:.4rem;border-radius:99px;background:var(--accent-soft);overflow:hidden;margin-top:.4rem}
+.bm-bar i{display:block;height:100%;border-radius:99px}
+.bm-nd{color:var(--muted);font-size:.75rem}
+
+/* ---------- 04 staff ---------- */
+.staff-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:1.4rem;align-items:center}
+@media (max-width:860px){.staff-grid{grid-template-columns:1fr}}
+.schips{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.schip{border:1px solid var(--line);border-radius:.8rem;padding:.7rem .85rem}
+.schip .v{font-family:'Unbounded';font-weight:700;font-size:1.25rem}
+.schip .t{font-size:.72rem;color:var(--muted);margin-top:.15rem}
+
+/* ---------- 05 results ---------- */
+.res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(13rem,1fr));gap:1rem}
+.rcard{border:1px solid var(--line);border-radius:.85rem;padding:.9rem;display:flex;flex-direction:column;justify-content:center;min-height:11rem}
+.rcap{font-size:.78rem;color:var(--muted);text-align:center;margin-top:.4rem}
+.big-num{font-family:'Unbounded';font-weight:800;font-size:3rem;color:var(--accent-ink);text-align:center;line-height:1.1}
+.otkr-bar{height:.85rem;border-radius:99px;background:var(--accent-soft);overflow:hidden}
+.otkr-bar i{display:block;height:100%;background:var(--teal);border-radius:99px}
+.infra div{display:flex;justify-content:space-between;gap:1rem;border-bottom:1px dashed var(--line);padding:.5rem 0;font-size:.83rem}
+.infra div:last-child{border-bottom:none}
+.infra b{font-weight:700}
+
+/* ---------- 06 signals ---------- */
+.signals{display:grid;grid-template-columns:repeat(auto-fit,minmax(16rem,1fr));gap:.9rem}
+.sig{border:1px solid var(--line);border-left-width:.32rem;border-radius:.8rem;padding:.85rem 1rem;background:var(--card)}
+.sig .tag{display:inline-block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;border-radius:99px;padding:.22rem .6rem;margin-bottom:.5rem}
+.sig p{margin:0;font-size:.85rem}
+.sig-strong{border-left-color:#3f9e63}.sig-strong .tag{background:rgba(63,158,99,.14);color:#3f9e63}
+.sig-grow{border-left-color:#d9a441}.sig-grow .tag{background:rgba(217,164,65,.16);color:#b07f22}
+.sig-alert{border-left-color:#d64545}.sig-alert .tag{background:rgba(214,69,69,.14);color:#d64545}
+.sig-data{border-left-color:#8a93a3}.sig-data .tag{background:rgba(138,147,163,.15);color:#68717f}
+html[data-theme="dark"] .sig-grow .tag{color:#e0b25f}
+html[data-theme="dark"] .sig-data .tag{color:#aeb6c4}
+
+/* charts */
+.chart{width:100%}
+.chart.sm{height:15rem}
+.chart.md{height:16.5rem}
+.chart.lg{height:23rem}
+
+/* ---------- footer ---------- */
+footer{max-width:72rem;margin:1rem auto 2.5rem;padding:0 1.25rem}
+.ftile{background:var(--card);border:1px solid var(--line);border-radius:1.1rem;box-shadow:var(--shadow);padding:1.5rem 1.7rem}
+.ftile b{font-family:'Unbounded';font-weight:600;font-size:.92rem}
+.ftile .just{text-align:justify;color:var(--muted);font-size:.8rem;margin:.7rem 0}
+.ftile .cr{color:var(--muted);font-size:.78rem;margin:.4rem 0 0}
+
+/* ---------- overlays ---------- */
+.overlay{position:fixed;inset:0;background:rgba(14,16,22,.55);z-index:120;display:flex;align-items:flex-start;justify-content:center;padding:3rem 1rem;overflow:auto}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:1rem;box-shadow:var(--shadow);width:100%;max-width:46rem;padding:1.4rem 1.5rem}
+.panel.small{max-width:24rem}
+.panel h3{font-size:1rem;margin-bottom:1rem}
+.panel .row{display:flex;justify-content:space-between;align-items:center;gap:.8rem;margin-bottom:1rem}
+.tabs{display:flex;gap:.4rem;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:1rem}
+.tab{border:none;background:transparent;color:var(--muted);font-weight:600;font-size:.83rem;padding:.55rem .8rem;border-bottom:2px solid transparent}
+.tab.active{color:var(--accent-ink);border-bottom-color:var(--accent)}
+.tabpane{display:none}
+.tabpane.active{display:block}
+.panel label{font-size:.8rem;color:var(--muted);display:flex;flex-direction:column;gap:.3rem}
+.panel input,.panel select,.panel textarea{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:.6rem;padding:.5rem .6rem;font-size:.87rem;font-family:inherit}
+.panel textarea{width:100%;min-height:12rem;line-height:1.5}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:.7rem;padding:.55rem .9rem;font-size:.84rem;font-weight:600}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.danger{background:var(--red);border-color:var(--red);color:#fff}
+.btn.ghost{background:transparent}
+.form-row{display:flex;gap:.8rem;flex-wrap:wrap;margin:.7rem 0}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.7rem;margin:.7rem 0}
+.form-grid label input{width:100%}
+.hint{color:var(--muted);font-size:.76rem;margin:.6rem 0}
+.status{font-size:.8rem;color:var(--green);margin:.5rem 0;min-height:1rem}
+.danger-zone{border:1px dashed var(--red);border-radius:.8rem;padding:.9rem;margin-top:1rem}
+.danger-zone p{margin:.1rem 0 .6rem;font-size:.8rem;color:var(--muted)}
+.pchips{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0 1rem}
+.pchip{border:1px solid var(--line);border-radius:.7rem;padding:.4rem .7rem;font-size:.8rem;display:flex;gap:.5rem;align-items:center}
+.pchip .on{color:var(--green);font-weight:700}
+.pchip button{border:none;background:none;color:var(--muted);font-size:.9rem}
+table.adm{width:100%;border-collapse:collapse;font-size:.82rem;margin:.7rem 0}
+table.adm th,table.adm td{border-bottom:1px solid var(--line);padding:.5rem .55rem;text-align:left}
+table.adm th{color:var(--muted);font-weight:600;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em}
+table.adm td button{border:none;background:none;font-size:.95rem;margin-right:.3rem}
+.efull{margin-bottom:.8rem}
+.efull input{width:100%}
+.egrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(11.5rem,1fr));gap:.7rem}
+.egrid label input{width:100%}
+.login-logo{display:grid;grid-template-columns:1fr 1fr;gap:.25rem;width:2.4rem;height:2.4rem;margin:0 auto 1rem}
+.login-logo i{border-radius:.35rem;display:block}
+</style>
+</head>
+<body>
+
+<div id="diag" hidden><b>Ошибка на странице:</b> <span>—</span> пришлите этот текст разработчику.</div>
+
+<header id="hdr">
+  <div class="hdr-in">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">
+        <i style="background:#6f4f9e"></i><i style="background:#3e8f8a"></i>
+        <i style="background:#d9a441"></i><i style="background:#a3d06a"></i>
+      </div>
+      <div>
+        <div class="hdr-title">Качество дополнительного образования</div>
+        <div class="hdr-sub">Чкаловский район · ДДТ · НОКО · ПФДО · конкурсное движение</div>
+      </div>
+    </div>
+    <div class="hdr-btns">
+      <button id="themeBtn" title="Переключить тему">☾</button>
+      <button id="lvBtn" title="Версия для слабовидящих">Aa</button>
+      <button id="pdfBtn">📄 PDF-отчёт</button>
+      <button id="loginBtn" class="accent">Войти</button>
+    </div>
+  </div>
+</header>
+
+<main id="content">
+
+  <section class="filters">
+    <label>Период <select id="periodSel"></select></label>
+    <span class="chip" id="chipOrgs">организаций: —</span>
+    <span class="chip ghost">портрет системы · организации не сравниваются между собой</span>
+  </section>
+
+  <div id="empty" hidden>
+    <div class="block">
+      <div class="bhead"><div><h2>Данные отсутствуют</h2><p>Загрузите таблицу через админ-панель или верните демо-данные.</p></div></div>
+      <div class="form-row">
+        <button class="btn primary" id="emptyAdminBtn">Открыть админ-панель</button>
+        <button class="btn" id="emptyDemoBtn">Вернуть демо-данные 2026</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="main">
+
+    <section class="block rv" id="b01">
+      <div class="bhead"><div class="bnum">01</div>
+        <div><h2>Масштаб системы</h2><p>Сводные показатели дополнительного образования района по выбранному периоду</p></div>
+      </div>
+      <div id="cards" class="kpis"></div>
+    </section>
+
+    <section class="block rv" id="b02">
+      <div class="bhead"><div class="bnum">02</div>
+        <div><h2>Состав системы</h2><p>Из чего складывается дополнительное образование района: контингент, программы, результаты</p></div>
+      </div>
+      <div class="donuts">
+        <div class="dcard"><div id="chDeti" class="chart sm"></div><div class="dcap" id="capDeti"></div></div>
+        <div class="dcard"><div id="chProg" class="chart sm"></div><div class="dcap" id="capProg"></div></div>
+        <div class="dcard"><div id="chPob" class="chart sm"></div><div class="dcap" id="capPob"></div></div>
+      </div>
+      <p class="note">Доли показывают устройство системы, а не места организаций: сравнение «кто лучше» не выполняется.</p>
+    </section>
+
+    <section class="block rv" id="b03">
+      <div class="bhead"><div class="bnum">03</div>
+        <div><h2>Программы и потенциал</h2><p>Район в целом против редактируемых ориентиров: доступность, содержание, кадры, открытость</p></div>
+      </div>
+      <div class="b3grid">
+        <div>
+          <div id="chRadar" class="chart lg"></div>
+          <p class="note">100 = ориентир достигнут. Ориентиры настраиваются в админ-панели (вкладка «Ориентиры и пороги»).</p>
+        </div>
+        <div>
+          <div id="bm" class="bm"></div>
+          <p class="note">Цвет — степень достижения ориентира (жёлтый → салатовый → зелёный). Красный используется только для абсолютных порогов тревог.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block rv" id="b04">
+      <div class="bhead"><div class="bnum">04</div>
+        <div><h2>Кадры</h2><p>Квалификация, возраст и устойчивость педагогических команд</p></div>
+      </div>
+      <div class="staff-grid">
+        <div>
+          <div id="chKval" class="chart md"></div>
+          <p class="note">Структура аттестации педагогов, среднее по двум ДДТ. Численность педагогов в данных отсутствует, поэтому взвешивание не применяется.</p>
+        </div>
+        <div id="staffChips" class="schips"></div>
+      </div>
+    </section>
+
+    <section class="block rv" id="b05">
+      <div class="bhead"><div class="bnum">05</div>
+        <div><h2>Результаты и открытость</h2><p>Конкурсное движение, цифровая открытость, инфраструктура и сетевое взаимодействие</p></div>
+      </div>
+      <div class="res-grid">
+        <div class="rcard"><div id="chGauge" class="chart md"></div><div class="rcap">Успешность участия в конкурсах (взвешено по числу победителей)</div></div>
+        <div class="rcard"><div class="big-num" id="pob100">—</div><div class="rcap">побед на 100 обучающихся</div></div>
+        <div class="rcard">
+          <div class="otkr-bar"><i id="otkrBar" style="width:0"></i></div>
+          <div class="rcap">Подписчики ВК — <b id="otkrPct">—</b> контингента (<span id="otkrAbs">—</span>)</div>
+        </div>
+        <div class="rcard"><div class="infra" id="infra"></div></div>
+      </div>
+    </section>
+
+    <section class="block rv" id="b06">
+      <div class="bhead"><div class="bnum">06</div>
+        <div><h2>Наблюдения и точки роста</h2><p>Мягкие сигналы по системе в целом: сильные стороны, резервы, качество данных. Не оценки организаций.</p></div>
+      </div>
+      <div id="signals" class="signals"></div>
+    </section>
+
+  </div>
+</main>
+
+<footer>
+  <div class="ftile">
+    <b>Управление образования Чкаловского района города Екатеринбурга</b>
+    <p class="just">Настоящий дашборд предназначен для информационно-аналитического сопровождения организаций дополнительного образования детей (домов детского творчества) Чкаловского района города Екатеринбурга. Размещённые сведения являются обобщёнными статистическими показателями деятельности организаций и не содержат персональных данных (Федеральный закон от 27.07.2006 № 152-ФЗ «О персональных данных»). Данные формируются на основании результатов независимой оценки качества образования (НОКО), внутренней статистики и открытых источников, носят справочно-аналитический характер и не являются официальной оценкой или аттестацией организаций в смысле Федерального закона от 29.12.2012 № 273-ФЗ «Об образовании в Российской Федерации», в том числе статьи 75 (дополнительное образование детей и взрослых). Цветовая шкала дашборда — инструмент наблюдения, а не наказания. Управление образования принимает меры к обеспечению достоверности информации, однако не несёт ответственности за возможные неточности. При использовании материалов ссылка на источник обязательна.</p>
+    <p class="cr">© Управление образования Чкаловского района города Екатеринбурга, 2026.</p>
+  </div>
+</footer>
+
+<!-- ============ LOGIN ============ -->
+<div class="overlay" id="loginOverlay" hidden>
+  <div class="panel small">
+    <div class="login-logo" aria-hidden="true">
+      <i style="background:#6f4f9e"></i><i style="background:#3e8f8a"></i>
+      <i style="background:#d9a441"></i><i style="background:#a3d06a"></i>
+    </div>
+    <h3 style="text-align:center">Вход для администратора</h3>
+    <div class="form-grid" style="grid-template-columns:1fr">
+      <label>Логин<input id="loginUser" autocomplete="username"></label>
+      <label>Пароль<input id="loginPass" type="password" autocomplete="current-password"></label>
+    </div>
+    <div class="status" id="loginErr" style="color:var(--red)"></div>
+    <div class="row" style="justify-content:flex-end">
+      <button class="btn ghost" id="loginCancel">Отмена</button>
+      <button class="btn primary" id="loginOk">Войти</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ ADMIN ============ -->
+<div class="overlay" id="adminOverlay" hidden>
+  <div class="panel">
+    <div class="row">
+      <h3 style="margin:0">Панель администратора</h3>
+      <div style="display:flex;gap:.5rem">
+        <button class="btn ghost" id="adminLogout">Выйти</button>
+        <button class="btn ghost" id="adminClose" title="Закрыть">✕</button>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tab active" data-tab="t-periods">Периоды и загрузка</button>
+      <button class="tab" data-tab="t-orgs">Организации и показатели</button>
+      <button class="tab" data-tab="t-targets">Ориентиры и пороги</button>
+      <button class="tab" data-tab="t-method">Методика</button>
+    </div>
+
+    <div class="tabpane active" id="t-periods">
+      <h4 style="margin:.2rem 0 .4rem;font-size:.86rem">Загруженные периоды</h4>
+      <div id="periodsList" class="pchips"></div>
+      <h4 style="margin:.8rem 0 .4rem;font-size:.86rem">Загрузить новый период (.xlsx или .csv)</h4>
+      <div class="form-row">
+        <label>Год<input id="impYear" type="number" value="2027" min="2000" max="2100" style="width:7rem"></label>
+        <label>Срез
+          <select id="impType">
+            <option>Годовой срез</option><option>1 четверть</option><option>2 четверть</option>
+            <option>3 четверть</option><option>4 четверть</option>
+          </select>
+        </label>
+        <input type="file" id="impFile" accept=".xlsx,.xls,.csv">
+      </div>
+      <div class="form-row">
+        <button class="btn primary" id="impBtn">Загрузить и сохранить период</button>
+        <button class="btn" id="tplBtn">⬇ Файл шаблона (.xlsx)</button>
+        <button class="btn" id="expBtn">⬇ Экспорт текущего периода в Excel</button>
+      </div>
+      <div class="status" id="impStatus"></div>
+      <p class="hint">Файл повторяет структуру исходной таблицы: 19 колонок — название ДДТ и 18 показателей. Шапка (в том числе двухэтажная) распознаётся автоматически. Прочерки и пустые ячейки читаются как «н/д»; числа вида «1.2К», «45,8 к», «26 862», «72%» приводятся к числам автоматически.</p>
+      <div class="danger-zone">
+        <p><b>Опасная зона.</b> Полная очистка удалит все периоды и организации.</p>
+        <div class="form-row" style="margin:0">
+          <button class="btn" id="demoBtn">Вернуть демо-данные 2026</button>
+          <button class="btn danger" id="wipeBtn">🗑 Очистить все данные</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabpane" id="t-orgs">
+      <div class="form-row">
+        <button class="btn primary" id="addOrgBtn">＋ Добавить организацию</button>
+      </div>
+      <table class="adm" id="orgsTable"></table>
+      <p class="hint">Изменения сохраняются сразу. Пустые поля при редактировании = «н/д».</p>
+    </div>
+
+    <div class="tabpane" id="t-targets">
+      <h4 style="margin:.2rem 0 .4rem;font-size:.86rem">Ориентиры радара и бенчмарка (блок 03)</h4>
+      <div class="form-grid">
+        <label>Соц.сертификат, %<input id="tg-sertifikat" type="number"></label>
+        <label>Уникальные программы, %<input id="tg-unikal" type="number"></label>
+        <label>Успешность участия, %<input id="tg-uspeh" type="number"></label>
+        <label>Доля ВКК, %<input id="tg-vkk" type="number"></label>
+        <label>Открытость (ВК), % контингента<input id="tg-otkrytost" type="number"></label>
+        <label>Доход на ребёнка, ₽<input id="tg-dohod" type="number"></label>
+        <label>Инфраструктура, %<input id="tg-osnash" type="number"></label>
+      </div>
+      <h4 style="margin:.9rem 0 .4rem;font-size:.86rem">Пороги «тревоги» (красный сигнал)</h4>
+      <div class="form-grid">
+        <label>Текучесть ≥, %<input id="th-tekuch" type="number"></label>
+        <label>Средний возраст ≥, лет<input id="th-vozrast" type="number"></label>
+        <label>Молодые специалисты ≥, %<input id="th-molodye" type="number"></label>
+        <label>НОКО ≤, балл<input id="th-noko" type="number"></label>
+      </div>
+      <p class="hint">Красный — только для объективно тревожных значений с абсолютными порогами. Остальная шкала — мягкое наблюдение: жёлтый → салатовый → зелёный.</p>
+      <div class="form-row">
+        <button class="btn primary" id="saveTargets">Сохранить</button>
+        <button class="btn ghost" id="resetTargets">Сбросить</button>
+      </div>
+      <div class="status" id="tgStatus"></div>
+    </div>
+
+    <div class="tabpane" id="t-method">
+      <textarea id="methodText"></textarea>
+      <div class="form-row">
+        <button class="btn primary" id="saveMethod">Сохранить методику</button>
+        <button class="btn ghost" id="resetMethod">Сбросить</button>
+      </div>
+      <div class="status" id="mStatus"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ EDIT ORG ============ -->
+<div class="overlay" id="editOverlay" hidden>
+  <div class="panel">
+    <h3 id="editTitle">Редактирование организации</h3>
+    <div id="editFields"></div>
+    <p class="hint">Пустое поле = «н/д» (показатель не применим или отсутствует в данных).</p>
+    <div class="row" style="justify-content:flex-end">
+      <button class="btn ghost" id="editCancel">Отмена</button>
+      <button class="btn primary" id="editSave">Сохранить</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CONFIRM ============ -->
+<div class="overlay" id="confirmOverlay" hidden>
+  <div class="panel small">
+    <h3>Подтверждение</h3>
+    <p id="confirmText" style="font-size:.88rem"></p>
+    <div class="row" style="justify-content:flex-end">
+      <button class="btn ghost" id="confirmNo">Отмена</button>
+      <button class="btn danger" id="confirmYes">Подтверждаю</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ================================================================
+   Качество дополнительного образования — Чкаловский район (ДДТ)
+   Портрет системы: без подрайонов, без рейтингов, без наставничества.
+   ================================================================ */
+'use strict';
+
+/* ---------- constants ---------- */
+var ADMIN_LOGIN='Admin', ADMIN_PASS='ChkaDO-2026#';
+var LS_KEY='chkdo_dashboard_v1', LS_THEME='chkdo_theme', LS_LV='chkdo_lv';
+var ECHARTS_URL='https://cdn.jsdelivr.net/npm/echarts@5.5.1/dist/echarts.min.js';
+var XLSX_URL='https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
+var JSPDF_URL='https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js';
+var H2C_URL='https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+var ORG_COLORS=['#6f4f9e','#3e8f8a','#d9a441','#3f9e63'];
+
+var FIELDS=[
+  {k:'noko',label:'НОКО, балл'},
+  {k:'deti',label:'Обучающиеся, чел'},
+  {k:'sertifikat',label:'Соц.сертификат, %'},
+  {k:'vish',label:'Педагоги с высшим образованием, %'},
+  {k:'vkk',label:'ВКК, %'},
+  {k:'kk1',label:'1КК, %'},
+  {k:'tekuch',label:'Текучесть кадров, % за год'},
+  {k:'molodye',label:'Доля молодых специалистов, %'},
+  {k:'vozrast',label:'Средний возраст педагогов, лет'},
+  {k:'programmy',label:'Количество реализуемых программ'},
+  {k:'pobediteli',label:'Победители конкурсов, чел'},
+  {k:'uspeh',label:'Успешность участия, % от общего числа'},
+  {k:'osnash',label:'Оснащённость помещений, %'},
+  {k:'partnery',label:'Сетевые партнёры, кол-во'},
+  {k:'vk',label:'Подписчики ВК, чел'},
+  {k:'unikal',label:'Доля уникальных программ, %'},
+  {k:'platnye',label:'Доходы от платных услуг, млн ₽'},
+  {k:'specoborud',label:'Спецоборудование (1 — да, 0 — нет)'}
+];
+
+var DEF_TARGETS={sertifikat:50,unikal:25,uspeh:85,vkk:60,otkrytost:80,dohod:1000,osnash:100};
+var DEF_TH={tekuch:5,vozrast:50,molodye:50,noko:80};
+
+var DEF_METHOD=[
+'Методика расчётов (дополнительное образование детей):',
+'',
+'Сводные показатели района (контингент, программы, победители, подписчики ВК, доходы) — суммы по всем организациям периода.',
+'',
+'Показатели, связанные с контингентом, усредняются с весами: НОКО и доля обучающихся по соц.сертификату — по численности обучающихся; успешность участия — по числу победителей; доля уникальных программ — по числу программ.',
+'',
+'Показатели педагогического блока (высшее образование, ВКК, 1КК, доля молодых специалистов, текучесть, средний возраст) и оснащённость помещений — простые средние по организациям, поскольку численность педагогов в данных отсутствует и взвешивание неприменимо.',
+'',
+'Радар «район против ориентиров» (блок 03): факт делится на редактируемый ориентир; 100 = ориентир достигнут. Ориентиры задаются во вкладке «Ориентиры и пороги».',
+'',
+'Цветовая шкала — инструмент наблюдения, а не наказания: жёлтый → салатовый → зелёный. Красный — только для объективных тревог с настраиваемыми абсолютными порогами (текучесть, средний возраст, доля молодых специалистов, НОКО).',
+'',
+'Прочерки и пустые значения — статус «н/д»: показатель исключается из расчётов, в сигналах отмечается как пробел данных.',
+'',
+'Дашборд не сравнивает организации между собой: ДДТ рассматриваются как состав единой системы дополнительного образования района. Доли в блоке 02 показывают устройство системы, а не места в рейтинге.'
+].join('\n');
+
+var REC={
+  sertifikat:'расширить запись по сертификатам ПФДО и долю программ, открытых к сертификату',
+  unikal:'обновление содержания: авторские, обновлённые и сетевые программы',
+  uspeh:'сопровождение участия обучающихся в конкурсах, олимпиадах и фестивалях',
+  vkk:'поддержка аттестации педагогов на квалификационные категории',
+  otkrytost:'развитие открытых каналов: соцсети, сайт, анонсы программ и результатов',
+  dohod:'развитие платных услуг и платных модулей при сохранении доступности',
+  osnash:'поддержание и обновление материально-технической базы'
+};
+
+/* ---------- utils ---------- */
+function $(id){return document.getElementById(id);}
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function isNum(x){return typeof x==='number'&&isFinite(x);}
+function fmt(v,d){ if(v==null||!isFinite(v))return '—'; d=d||0; return v.toLocaleString('ru-RU',{minimumFractionDigits:d,maximumFractionDigits:d}); }
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms);});}
+function showDiag(msg){ var d=$('diag'); d.hidden=false; d.querySelector('span').textContent=String(msg); }
+window.addEventListener('error',function(e){showDiag(e.message||'неизвестная ошибка');});
+window.addEventListener('unhandledrejection',function(e){showDiag(e.reason&&e.reason.message||String(e.reason));});
+
+function parseVal(raw){
+  if(raw==null)return null;
+  if(typeof raw==='number')return isFinite(raw)?raw:null;
+  var s=String(raw).trim();
+  if(!s)return null;
+  if(/^[-–—−]+$/.test(s))return null;
+  s=s.replace(/\s+/g,'').replace(/%$/,'');
+  var mult=1;
+  if(/[кКkK]$/.test(s)){mult=1000;s=s.slice(0,-1);}
+  if(s.indexOf(',')>=0){
+    if(/^\d{1,3}(,\d{3})+$/.test(s)) s=s.replace(/,/g,'');
+    else s=s.replace(/,/g,'.');
+  }
+  var x=parseFloat(s);
+  return isFinite(x)?x*mult:null;
+}
+function normName(s){
+  s=String(s||'').trim().replace(/^"+|"+$/g,'');
+  if(s&&s.indexOf('«')<0)s='«'+s+'»';
+  return s;
+}
+
+/* ---------- script loader ---------- */
+var _libCache={};
+function loadScript(url){
+  if(_libCache[url])return _libCache[url];
+  _libCache[url]=new Promise(function(res,rej){
+    var s=document.createElement('script');
+    s.src=url;s.async=true;
+    s.onload=function(){res();};
+    s.onerror=function(){rej(new Error('Не удалось загрузить библиотеку: '+url));};
+    document.head.appendChild(s);
+  });
+  return _libCache[url];
+}
+function ensureXlsx(cb){ if(window.XLSX)return cb(); loadScript(XLSX_URL).then(cb).catch(function(e){showDiag(e.message);}); }
+
+/* ---------- demo data ---------- */
+function demoPeriod(){
+  return {
+    id:'p2026',name:'2026',type:'Годовой срез',
+    rows:[
+      {name:'«Радуга»',v:{noko:99,deti:3005,sertifikat:45,vish:75,vkk:69,kk1:19,tekuch:0,molodye:38,vozrast:42,programmy:56,pobediteli:2283,uspeh:76,osnash:100,partnery:null,vk:2761,unikal:9,platnye:1,specoborud:1}},
+      {name:'«Химмашевец»',v:{noko:98,deti:3422,sertifikat:34,vish:89,vkk:41,kk1:32,tekuch:2,molodye:46,vozrast:41,programmy:72,pobediteli:3260,uspeh:83,osnash:100,partnery:4,vk:2198,unikal:17,platnye:3,specoborud:1}}
+    ]
+  };
+}
+function defaultState(){
+  var p=demoPeriod();
+  return {periods:[p],active:p.id,targets:Object.assign({},DEF_TARGETS),thresholds:Object.assign({},DEF_TH),methodology:DEF_METHOD};
+}
+
+/* ---------- state ---------- */
+var state=null;
+function loadState(){
+  try{
+    var raw=localStorage.getItem(LS_KEY);
+    if(raw){
+      var s=JSON.parse(raw);
+      if(s&&Array.isArray(s.periods)){
+        state=s;
+        state.targets=Object.assign({},DEF_TARGETS,s.targets||{});
+        state.thresholds=Object.assign({},DEF_TH,s.thresholds||{});
+        if(!state.methodology)state.methodology=DEF_METHOD;
+        return;
+      }
+    }
+  }catch(e){/* повреждённое хранилище — пересоздаём */}
+  state=defaultState();
+}
+function save(){ try{localStorage.setItem(LS_KEY,JSON.stringify(state));}catch(e){showDiag('localStorage: '+e.message);} }
+function activePeriod(){
+  var p=state.periods.find(function(x){return x.id===state.active;});
+  return p||(state.periods[0]||null);
+}
+
+/* ---------- aggregates ---------- */
+var AGG=null;
+function aggregates(rows){
+  var n=rows.length;
+  function sum(k){return rows.reduce(function(a,r){return a+(isNum(r.v[k])?r.v[k]:0);},0);}
+  function mean(k){var xs=rows.filter(function(r){return isNum(r.v[k]);}).map(function(r){return r.v[k];});
+    return xs.length?xs.reduce(function(a,b){return a+b;},0)/xs.length:null;}
+  function wBy(k,wk){var num=0,den=0;rows.forEach(function(r){
+    if(isNum(r.v[k])&&isNum(r.v[wk])){num+=r.v[k]*r.v[wk];den+=r.v[wk];}});
+    return den?num/den:null;}
+  var deti=sum('deti');
+  var pKnown=rows.filter(function(r){return isNum(r.v.partnery);}).length;
+  return {
+    n:n,deti:deti,
+    programmy:sum('programmy'),pobediteli:sum('pobediteli'),vk:sum('vk'),platnye:sum('platnye'),
+    partnersSum:sum('partnery'),partnersKnown:pKnown,partnersNA:n-pKnown,
+    nokoW:wBy('noko','deti'),
+    sertPct:wBy('sertifikat','deti'),
+    sertDeti:rows.reduce(function(a,r){return a+(isNum(r.v.sertifikat)&&isNum(r.v.deti)?r.v.deti*r.v.sertifikat/100:0);},0),
+    uspehW:wBy('uspeh','pobediteli'),
+    unikalW:wBy('unikal','programmy'),
+    vishM:mean('vish'),vkkM:mean('vkk'),kk1M:mean('kk1'),
+    molodyeM:mean('molodye'),vozrastM:mean('vozrast'),tekuchM:mean('tekuch'),
+    osnashM:mean('osnash'),
+    specCount:rows.filter(function(r){return isNum(r.v.specoborud)&&r.v.specoborud>=1;}).length,
+    pob100:deti?sum('pobediteli')/deti*100:null,
+    platPerChild:deti?sum('platnye')*1e6/deti:null,
+    vkPct:deti?sum('vk')/deti*100:null
+  };
+}
+
+/* benchmark list */
+function bmList(){
+  var T=state.targets;
+  return [
+    {k:'sertifikat',name:'Соц.сертификат',fact:function(a){return a.sertPct;},target:function(){return T.sertifikat;},fmt:function(v){return fmt(v,1)+'%';}},
+    {k:'unikal',name:'Уникальные программы',fact:function(a){return a.unikalW;},target:function(){return T.unikal;},fmt:function(v){return fmt(v,1)+'%';}},
+    {k:'uspeh',name:'Успешность участия',fact:function(a){return a.uspehW;},target:function(){return T.uspeh;},fmt:function(v){return fmt(v,1)+'%';}},
+    {k:'vkk',name:'Доля ВКК',fact:function(a){return a.vkkM;},target:function(){return T.vkk;},fmt:function(v){return fmt(v,1)+'%';}},
+    {k:'otkrytost',name:'Открытость (ВК)',fact:function(a){return a.vkPct;},target:function(){return T.otkrytost;},fmt:function(v){return fmt(v,0)+'%';}},
+    {k:'dohod',name:'Доход на ребёнка',fact:function(a){return a.platPerChild;},target:function(){return T.dohod;},fmt:function(v){return fmt(v,0)+' ₽';}},
+    {k:'osnash',name:'Инфраструктура',fact:function(a){return a.osnashM;},target:function(){return T.osnash;},fmt:function(v){return fmt(v,0)+'%';}}
+  ];
+}
+function bmColor(ratio){
+  if(ratio>=1)return '#3f9e63';
+  if(ratio>=0.66)return '#a3d06a';
+  return '#d9a441';
+}
+
+/* ---------- rendering ---------- */
+function renderPeriodSel(){
+  var sel=$('periodSel');
+  sel.innerHTML=state.periods.map(function(p){
+    return '<option value="'+p.id+'"'+(p.id===(activePeriod()||{}).id?' selected':'')+'>'+esc(p.name)+' · '+esc(p.type)+'</option>';
+  }).join('');
+}
+function renderCards(){
+  var a=AGG,p=activePeriod(),rows=p.rows;
+  function strip(k,total){
+    if(!total)return '';
+    return '<div class="cstrip">'+rows.map(function(r,i){
+      var v=isNum(r.v[k])?r.v[k]:0;var w=v/total*100;
+      return '<span title="'+esc(r.name)+': '+fmt(v)+'" style="width:'+w+'%;background:'+ORG_COLORS[i%ORG_COLORS.length]+'"></span>';
+    }).join('')+'</div>';
+  }
+  function byOrg(k){
+    return rows.map(function(r){return esc(r.name)+' '+fmt(r.v[k]);}).join(' · ');
+  }
+  var C=[
+    {t:'Обучающиеся',v:fmt(a.deti),s:strip('deti',a.deti),c:byOrg('deti')},
+    {t:'Реализуемые программы',v:fmt(a.programmy),s:strip('programmy',a.programmy),c:byOrg('programmy')},
+    {t:'Победители конкурсов',v:fmt(a.pobediteli),s:strip('pobediteli',a.pobediteli),c:byOrg('pobediteli')},
+    {t:'Средний НОКО',v:fmt(a.nokoW,1),c:'взвешено по контингенту · '+byOrg('noko')},
+    {t:'Соц.сертификат ПФДО',v:fmt(a.sertPct,1)+'%',c:'≈ '+fmt(a.sertDeti)+' детей · ориентир '+fmt(state.targets.sertifikat,0)+'%'},
+    {t:'Доходы от платных услуг',v:fmt(a.platnye,1)+' млн ₽',c:fmt(a.platPerChild,0)+' ₽ на обучающегося'},
+    {t:'Подписчики ВК',v:fmt(a.vk),c:'≈ '+fmt(a.vkPct,0)+'% контингента'}
+  ];
+  $('cards').innerHTML=C.map(function(x){
+    return '<div class="kpi"><div class="kpi-t">'+x.t+'</div><div class="kpi-v">'+x.v+'</div>'+(x.s||'')+'<div class="kpi-c">'+(x.c||'')+'</div></div>';
+  }).join('');
+}
+function renderBm(){
+  var a=AGG;
+  $('bm').innerHTML=bmList().map(function(m){
+    var f=m.fact(a),tg=m.target();
+    if(f==null||!tg)return '<div class="bm-cell"><div class="bm-t">'+esc(m.name)+'</div><div class="bm-nd">н/д</div></div>';
+    var ratio=f/tg,col=bmColor(ratio);
+    return '<div class="bm-cell" style="border-left:.28rem solid '+col+'">'
+      +'<div class="bm-t">'+esc(m.name)+'</div>'
+      +'<div class="bm-v">'+m.fmt(f)+' <span>цель '+m.fmt(tg)+'</span></div>'
+      +'<div class="bm-bar"><i style="width:'+Math.min(ratio,1)*100+'%;background:'+col+'"></i></div></div>';
+  }).join('');
+}
+function renderStaff(){
+  var a=AGG;
+  $('staffChips').innerHTML=[
+    {v:fmt(a.vishM,0)+'%',t:'педагоги с высшим образованием'},
+    {v:fmt(a.molodyeM,0)+'%',t:'доля молодых специалистов'},
+    {v:fmt(a.vozrastM,1),t:'средний возраст педагогов'},
+    {v:fmt(a.tekuchM,1)+'%',t:'текучесть кадров за год'}
+  ].map(function(x){return '<div class="schip"><div class="v">'+x.v+'</div><div class="t">'+x.t+'</div></div>';}).join('');
+}
+function renderResults(){
+  var a=AGG,p=activePeriod();
+  $('pob100').textContent=fmt(a.pob100,0);
+  $('otkrBar').style.width=Math.min(a.vkPct||0,100)+'%';
+  $('otkrPct').textContent=fmt(a.vkPct,0)+'%';
+  $('otkrAbs').textContent=fmt(a.vk)+' чел';
+  var rows=[
+    ['Оснащённость помещений',fmt(a.osnashM,0)+'%'],
+    ['Спецоборудование','в '+a.specCount+' из '+a.n+' ДДТ'],
+    ['Сетевые партнёры',a.partnersNA>0?fmt(a.partnersSum)+' · данные у '+a.partnersKnown+' из '+a.n:fmt(a.partnersSum)],
+    ['Программ на 1000 детей',fmt(a.deti?a.programmy/a.deti*1000:null,1)]
+  ];
+  $('infra').innerHTML=rows.map(function(r){return '<div><span>'+r[0]+'</span><b>'+r[1]+'</b></div>';}).join('');
+}
+function renderSignals(){
+  var a=AGG,p=activePeriod(),rows=p.rows,T=state.targets,TH=state.thresholds,S=[];
+  var alerts=[];
+  rows.forEach(function(r){
+    if(isNum(r.v.tekuch)&&r.v.tekuch>=TH.tekuch)alerts.push(esc(r.name)+': текучесть кадров '+fmt(r.v.tekuch,1)+'% при пороге '+fmt(TH.tekuch,0)+'%');
+    if(isNum(r.v.vozrast)&&r.v.vozrast>=TH.vozrast)alerts.push(esc(r.name)+': средний возраст педагогов '+fmt(r.v.vozrast,0)+' при пороге '+fmt(TH.vozrast,0));
+    if(isNum(r.v.molodye)&&r.v.molodye>=TH.molodye)alerts.push(esc(r.name)+': доля молодых специалистов '+fmt(r.v.molodye,0)+'% при пороге '+fmt(TH.molodye,0)+'%');
+    if(isNum(r.v.noko)&&r.v.noko<=TH.noko)alerts.push(esc(r.name)+': НОКО '+fmt(r.v.noko,0)+' при пороге '+fmt(TH.noko,0));
+  });
+  alerts.forEach(function(t){S.push({cls:'sig-alert',tag:'Тревога',text:t});});
+  if(!alerts.length)S.push({cls:'sig-strong',tag:'Тревог нет',text:'Абсолютные пороги (текучесть, возраст, доля молодых специалистов, НОКО) не превышены.'});
+  if(a.nokoW!=null&&a.nokoW>=95)S.push({cls:'sig-strong',tag:'Сильная сторона',text:'Качество подтверждено: средний НОКО '+fmt(a.nokoW,1)+' (взвешено по контингенту).'});
+  if(a.osnashM!=null&&a.osnashM>=99)S.push({cls:'sig-strong',tag:'Сильная сторона',text:'Инфраструктура: оснащённость помещений '+fmt(a.osnashM,0)+'%, спецоборудование есть в '+a.specCount+' из '+a.n+' ДДТ.'});
+  if(a.tekuchM!=null&&a.tekuchM<=1.5)S.push({cls:'sig-strong',tag:'Сильная сторона',text:'Стабильные кадры: средняя текучесть '+fmt(a.tekuchM,1)+'% за год.'});
+  if(a.pob100!=null&&a.pob100>=50)S.push({cls:'sig-strong',tag:'Сильная сторона',text:'Конкурсная активность: '+fmt(a.pob100,0)+' побед на 100 обучающихся, успешность участия '+fmt(a.uspehW,0)+'%.'});
+  bmList().forEach(function(m){
+    var f=m.fact(a);if(f==null)return;
+    var tg=m.target();if(!tg)return;
+    if(f/tg<1)S.push({cls:'sig-grow',tag:'Точка роста',text:m.name+': '+m.fmt(f)+' при ориентире '+m.fmt(tg)+' — '+REC[m.k]+'.'});
+  });
+  if(a.molodyeM!=null&&a.vkkM!=null&&a.molodyeM>=40&&a.vkkM<60)
+    S.push({cls:'sig-grow',tag:'Кадры',text:'Молодые без категории: доля молодых специалистов '+fmt(a.molodyeM,0)+'% при доле ВКК '+fmt(a.vkkM,0)+'% — сопровождение аттестации и внутренние наставнические пары в командах.'});
+  if(a.partnersNA>0)
+    S.push({cls:'sig-data',tag:'Данные',text:'Сетевое взаимодействие: показатель заявлен у '+a.partnersKnown+' из '+a.n+' ДДТ — дополнить следующий срез.'});
+  $('signals').innerHTML=S.map(function(s){
+    return '<div class="sig '+s.cls+'"><span class="tag">'+s.tag+'</span><p>'+s.text+'</p></div>';
+  }).join('');
+}
+
+/* ---------- charts ---------- */
+var CH={},chartsPending=false;
+function cp(){
+  var dark=document.documentElement.dataset.theme==='dark';
+  return {text:dark?'#e9ebf0':'#20242e',muted:dark?'#9aa2b1':'#68717f',
+    split:dark?'rgba(233,235,240,.12)':'rgba(32,36,46,.10)',card:dark?'#1d2027':'#ffffff'};
+}
+function mkChart(id){
+  var el=$(id);if(!el||!window.echarts)return null;
+  if(CH[id])CH[id].dispose();
+  var c=echarts.init(el);CH[id]=c;return c;
+}
+function donutOpt(items,pal,total,caption){
+  return {
+    tooltip:{trigger:'item',formatter:'{b}: {c}'},
+    legend:{bottom:0,left:'center',itemWidth:11,itemHeight:11,textStyle:{color:pal.text,fontFamily:'Golos Text',fontSize:12}},
+    series:[{
+      type:'pie',radius:['52%','74%'],center:['50%','44%'],
+      itemStyle:{borderColor:pal.card,borderWidth:3,borderRadius:4},
+      label:{show:false},labelLine:{show:false},
+      data:items
+    }]
+  };
+}
+function renderCharts(){
+  if(!window.echarts){chartsPending=true;return;}
+  var p=activePeriod();
+  if(!p||!p.rows.length||!AGG)return;
+  var a=AGG,pal=cp(),rows=p.rows;
+  function items(k){
+    return rows.map(function(r,i){return {name:r.name,value:isNum(r.v[k])?r.v[k]:0,itemStyle:{color:ORG_COLORS[i%ORG_COLORS.length]}};});
+  }
+  var c1=mkChart('chDeti');
+  if(c1){c1.setOption(donutOpt(items('deti'),pal));$('capDeti').textContent='Контингент — всего '+fmt(a.deti)+' обучающихся';}
+  var c2=mkChart('chProg');
+  if(c2){c2.setOption(donutOpt(items('programmy'),pal));$('capProg').textContent='Программы — всего '+fmt(a.programmy);}
+  var c3=mkChart('chPob');
+  if(c3){c3.setOption(donutOpt(items('pobediteli'),pal));$('capPob').textContent='Победители конкурсов — всего '+fmt(a.pobediteli)+' чел';}
+
+  /* radar */
+  var list=bmList();
+  var ind=list.map(function(m){return {name:m.name,max:120};});
+  var facts=list.map(function(m){
+    var f=m.fact(a),tg=m.target();
+    if(f==null||!tg)return 0;
+    return Math.min(f/tg*100,120);
+  });
+  var targets=list.map(function(){return 100;});
+  var cr=mkChart('chRadar');
+  if(cr){
+    cr.setOption({
+      legend:{bottom:0,textStyle:{color:pal.text,fontFamily:'Golos Text'},itemWidth:14,itemHeight:9},
+      tooltip:{},
+      radar:{indicator:ind,center:['50%','48%'],radius:'66%',
+        axisName:{color:pal.muted,fontFamily:'Golos Text',fontSize:11},
+        splitLine:{lineStyle:{color:pal.split}},
+        splitArea:{areaStyle:{color:['rgba(0,0,0,0)','rgba(0,0,0,0)']}},
+        axisLine:{lineStyle:{color:pal.split}}},
+      series:[
+        {name:'Район (факт)',type:'radar',color:'#6f4f9e',symbol:'circle',symbolSize:5,
+          lineStyle:{width:2.5,color:'#6f4f9e'},itemStyle:{color:'#6f4f9e'},
+          areaStyle:{color:'rgba(111,79,158,.22)'},data:[{value:facts}]},
+        {name:'Ориентиры',type:'radar',color:'#d9a441',symbol:'none',
+          lineStyle:{width:2,type:'dashed',color:'#d9a441'},itemStyle:{color:'#d9a441'},
+          areaStyle:null,data:[{value:targets}]}
+      ]
+    });
+  }
+
+  /* qualification stack */
+  var vkk=a.vkkM==null?0:Math.round(a.vkkM*10)/10;
+  var kk1=a.kk1M==null?0:Math.round(a.kk1M*10)/10;
+  var other=Math.max(0,Math.round((100-vkk-kk1)*10)/10);
+  var cq=mkChart('chKval');
+  if(cq){
+    cq.setOption({
+      tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:function(ps){
+        return ps.map(function(x){return x.marker+x.seriesName+': '+x.value+'%';}).join('<br>');}},
+      legend:{bottom:0,textStyle:{color:pal.text,fontFamily:'Golos Text'},itemWidth:12,itemHeight:12},
+      grid:{left:8,right:26,top:14,bottom:44,containLabel:true},
+      xAxis:{type:'value',max:100,axisLabel:{color:pal.muted,formatter:'{value}%',fontFamily:'Golos Text'},
+        splitLine:{lineStyle:{color:pal.split}},axisLine:{lineStyle:{color:pal.split}}},
+      yAxis:{type:'category',data:['Педагоги'],axisLabel:{color:pal.text,fontFamily:'Golos Text'},
+        axisLine:{lineStyle:{color:pal.split}},axisTick:{show:false}},
+      series:[
+        {name:'ВКК',type:'bar',stack:'k',color:'#6f4f9e',itemStyle:{color:'#6f4f9e'},barWidth:34,
+          label:{show:true,formatter:'{c}%',color:'#fff',fontSize:11},data:[vkk]},
+        {name:'1КК',type:'bar',stack:'k',color:'#3e8f8a',itemStyle:{color:'#3e8f8a'},
+          label:{show:true,formatter:'{c}%',color:'#fff',fontSize:11},data:[kk1]},
+        {name:'Прочие',type:'bar',stack:'k',color:'#d9a441',itemStyle:{color:'#d9a441'},
+          label:{show:true,formatter:'{c}%',color:'#fff',fontSize:11},data:[other]}
+      ]
+    });
+  }
+
+  /* gauge */
+  var cg=mkChart('chGauge');
+  if(cg){
+    cg.setOption({
+      series:[{
+        type:'gauge',startAngle:180,endAngle:0,min:0,max:100,center:['50%','70%'],radius:'100%',
+        progress:{show:true,width:20,roundCap:true,itemStyle:{color:'#6f4f9e'}},
+        axisLine:{lineStyle:{width:20,color:[[1,'rgba(111,79,158,.14)']]}},
+        pointer:{show:false},axisTick:{show:false},splitLine:{show:false},axisLabel:{show:false},
+        anchor:{show:false},
+        detail:{valueAnimation:true,offsetCenter:[0,'-12%'],formatter:'{value}%',
+          fontFamily:'Unbounded',fontWeight:'800',fontSize:30,color:pal.text},
+        data:[{value:a.uspehW==null?0:Math.round(a.uspehW)}]
+      }]
+    });
+  }
+}
+
+/* ---------- render all ---------- */
+function renderAll(){
+  var p=activePeriod();
+  var has=!!(p&&p.rows.length);
+  $('empty').hidden=has;
+  $('main').style.display=has?'':'none';
+  if(!has)return;
+  AGG=aggregates(p.rows);
+  renderPeriodSel();
+  $('chipOrgs').textContent='организаций: '+p.rows.length;
+  renderCards();renderBm();renderStaff();renderResults();renderSignals();
+  renderCharts();
+}
+
+/* ---------- admin: generic ---------- */
+var authed=false;
+function show(id){$(id).hidden=false;}
+function hide(id){$(id).hidden=true;}
+function updateLoginBtn(){$('loginBtn').textContent=authed?'⚙ Админ-панель':'Войти';}
+
+var confirmCb=null;
+function askConfirm(text,cb){$('confirmText').textContent=text;confirmCb=cb;show('confirmOverlay');}
+$('confirmYes').onclick=function(){hide('confirmOverlay');if(confirmCb)confirmCb();confirmCb=null;};
+$('confirmNo').onclick=function(){hide('confirmOverlay');confirmCb=null;};
+
+function openLogin(){show('loginOverlay');$('loginUser').value='';$('loginPass').value='';$('loginErr').textContent='';$('loginUser').focus();}
+function tryLogin(){
+  if($('loginUser').value.trim()===ADMIN_LOGIN&&$('loginPass').value===ADMIN_PASS){
+    authed=true;hide('loginOverlay');updateLoginBtn();openAdmin();
+  }else $('loginErr').textContent='Неверный логин или пароль';
+}
+$('loginOk').onclick=tryLogin;
+$('loginPass').addEventListener('keydown',function(e){if(e.key==='Enter')tryLogin();});
+$('loginCancel').onclick=function(){hide('loginOverlay');};
+$('loginBtn').onclick=function(){ if(authed)openAdmin(); else openLogin(); };
+
+function openAdmin(){
+  renderPeriodsList();renderOrgsTable();fillTargetsForm();
+  $('methodText').value=state.methodology;
+  show('adminOverlay');
+}
+$('adminClose').onclick=function(){hide('adminOverlay');};
+$('adminLogout').onclick=function(){authed=false;hide('adminOverlay');updateLoginBtn();};
+document.querySelectorAll('.tab').forEach(function(t){
+  t.onclick=function(){
+    document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active');});
+    document.querySelectorAll('.tabpane').forEach(function(x){x.classList.remove('active');});
+    t.classList.add('active');$(t.dataset.tab).classList.add('active');
+  };
+});
+
+/* ---------- admin: periods ---------- */
+function renderPeriodsList(){
+  var cur=activePeriod();
+  $('periodsList').innerHTML=state.periods.map(function(p){
+    var act=cur&&p.id===cur.id;
+    return '<span class="pchip">'+(act?'<span class="on">●</span>':'')+esc(p.name)+' · '+esc(p.type)+' ('+p.rows.length+' org.)'
+      +(state.periods.length>1?' <button data-del="'+p.id+'" title="Удалить период">✕</button>':'')+'</span>';
+  }).join('');
+  $('periodsList').querySelectorAll('[data-del]').forEach(function(b){
+    b.onclick=function(){
+      askConfirm('Удалить период '+b.dataset.del+'? Действие необратимо.',function(){
+        state.periods=state.periods.filter(function(x){return x.id!==b.dataset.del;});
+        if(!state.periods.length){state.periods=[demoPeriod()];}
+        state.active=state.periods[0].id;
+        save();renderAll();renderPeriodsList();
+      });
+    };
+  });
+}
+function impMsg(t){var el=$('impStatus');el.textContent=t;el.style.color='var(--green)';if(/ошибка|не найдено/i.test(t))el.style.color='var(--red)';}
+
+function parseRows(aoa){
+  var out=[];
+  aoa.forEach(function(r){
+    if(!Array.isArray(r)||!r.length)return;
+    var nameRaw=r[0];
+    if(typeof nameRaw!=='string'||!nameRaw.trim())return;
+    var nums=0;
+    for(var i=1;i<=18;i++){if(parseVal(r[i])!=null)nums++;}
+    if(nums<10)return;
+    var v={};
+    FIELDS.forEach(function(f,i){v[f.k]=parseVal(r[i+1]);});
+    out.push({name:normName(nameRaw),v:v});
+  });
+  return out;
+}
+function addPeriod(name,type,rows){
+  var per={id:'p'+Date.now(),name:String(name),type:type,rows:rows};
+  var ex=state.periods.findIndex(function(p){return p.name===per.name&&p.type===per.type;});
+  if(ex>=0)state.periods[ex]=per; else state.periods.push(per);
+  state.active=per.id;
+  save();renderAll();renderPeriodsList();
+  impMsg('Период сохранён: '+per.name+' ('+per.type+'), организаций: '+rows.length+'.');
+}
+$('impBtn').onclick=function(){
+  var f=$('impFile').files[0];
+  if(!f){impMsg('Выберите файл .xlsx или .csv');return;}
+  ensureXlsx(function(){
+    var fr=new FileReader();
+    fr.onload=function(){
+      try{
+        var wb=XLSX.read(new Uint8Array(fr.result),{type:'array'});
+        var ws=wb.Sheets[wb.SheetNames[0]];
+        var aoa=XLSX.utils.sheet_to_json(ws,{header:1,defval:''});
+        var rows=parseRows(aoa);
+        if(!rows.length){impMsg('Не найдено строк с данными: проверьте структуру файла (19 колонок).');return;}
+        addPeriod($('impYear').value||String(new Date().getFullYear()),$('impType').value,rows);
+      }catch(e){impMsg('Ошибка чтения файла: '+e.message);}
+    };
+    fr.readAsArrayBuffer(f);
+  });
+};
+function buildExportAoa(p){
+  var head=['ДДТ','НОКО','Обучающиеся, чел','Соц.сертификат, %','Педагоги с высшим, %','ВКК, %','1КК, %','Текучесть, %','Молодые специалисты, %','Средний возраст','Программ','Победители, чел','Успешность, %','Оснащённость, %','Партнёры','Подписчики ВК','Уникальные программы, %','Платные услуги, млн ₽','Спецоборудование'];
+  var aoa=[head];
+  p.rows.forEach(function(r){
+    aoa.push([r.name].concat(FIELDS.map(function(f){return r.v[f.k]==null?'-':r.v[f.k];})));
+  });
+  return aoa;
+}
+$('expBtn').onclick=function(){
+  var p=activePeriod();if(!p)return;
+  ensureXlsx(function(){
+    var wb=XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(buildExportAoa(p)),'Лист1');
+    XLSX.writeFile(wb,'UDOD_Chkalovskiy_'+p.name+'.xlsx');
+  });
+};
+$('tplBtn').onclick=function(){
+  ensureXlsx(function(){
+    var aoa=buildExportAoa({rows:[{name:'«Название ДДТ»',v:{noko:99,deti:3005,sertifikat:45,vish:75,vkk:69,kk1:19,tekuch:0,molodye:38,vozrast:42,programmy:56,pobediteli:2283,uspeh:76,osnash:100,partnery:null,vk:2761,unikal:9,platnye:1,specoborud:1}}]});
+    var wb=XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(aoa),'Шаблон');
+    XLSX.writeFile(wb,'UDOD_shablon.xlsx');
+  });
+};
+$('demoBtn').onclick=function(){
+  askConfirm('Заменить все данные демо-срезом 2026?',function(){
+    state=defaultState();save();renderAll();renderPeriodsList();renderOrgsTable();fillTargetsForm();
+    $('methodText').value=state.methodology;
+  });
+};
+$('wipeBtn').onclick=function(){
+  askConfirm('Полностью очистить все периоды и организации?',function(){
+    state.periods=[];state.active=null;save();renderAll();renderPeriodsList();renderOrgsTable();
+  });
+};
+
+/* ---------- admin: orgs ---------- */
+function renderOrgsTable(){
+  var p=activePeriod();
+  if(!p||!p.rows.length){$('orgsTable').innerHTML='<tr><td>Нет данных</td></tr>';return;}
+  var html='<tr><th>Название</th><th>НОКО</th><th>Обуч.</th><th>Программы</th><th>Сертификат</th><th></th></tr>';
+  p.rows.forEach(function(r,i){
+    html+='<tr><td>'+esc(r.name)+'</td><td>'+fmt(r.v.noko)+'</td><td>'+fmt(r.v.deti)+'</td><td>'+fmt(r.v.programmy)+'</td><td>'+fmt(r.v.sertifikat)+'%</td>'
+      +'<td><button data-edit="'+i+'" title="Редактировать">✎</button><button data-del="'+i+'" title="Удалить">🗑</button></td></tr>';
+  });
+  $('orgsTable').innerHTML=html;
+  $('orgsTable').querySelectorAll('[data-edit]').forEach(function(b){b.onclick=function(){openEdit(+b.dataset.edit);};});
+  $('orgsTable').querySelectorAll('[data-del]').forEach(function(b){
+    b.onclick=function(){
+      var i=+b.dataset.del;
+      askConfirm('Удалить организацию '+p.rows[i].name+'?',function(){
+        p.rows.splice(i,1);save();renderAll();renderOrgsTable();
+      });
+    };
+  });
+}
+var editingIdx=-1;
+function openEdit(idx){
+  var p=activePeriod();
+  if(!p){impMsg('Сначала загрузите период');return;}
+  editingIdx=idx;
+  var row=idx>=0?p.rows[idx]:{name:'',v:{}};
+  $('editTitle').textContent=idx>=0?'Редактирование организации':'Новая организация';
+  var html='<label class="efull">Название<input id="ef-name" value="'+esc(row.name)+'" placeholder="«Название»"></label><div class="egrid">';
+  FIELDS.forEach(function(f){
+    html+='<label>'+esc(f.label)+'<input data-k="'+f.k+'" value="'+(row.v[f.k]==null?'':row.v[f.k])+'"></label>';
+  });
+  html+='</div>';
+  $('editFields').innerHTML=html;
+  show('editOverlay');
+}
+$('addOrgBtn').onclick=function(){openEdit(-1);};
+$('editCancel').onclick=function(){hide('editOverlay');};
+$('editSave').onclick=function(){
+  var p=activePeriod();if(!p)return;
+  var name=$('ef-name').value.trim();
+  if(!name){$('ef-name').style.borderColor='var(--red)';return;}
+  var v={};
+  $('editFields').querySelectorAll('input[data-k]').forEach(function(i){v[i.dataset.k]=parseVal(i.value);});
+  if(editingIdx>=0)p.rows[editingIdx]={name:name,v:v};
+  else p.rows.push({name:name,v:v});
+  save();renderAll();renderOrgsTable();hide('editOverlay');
+};
+
+/* ---------- admin: targets & thresholds ---------- */
+function fillTargetsForm(){
+  var T=state.targets,TH=state.thresholds;
+  $('tg-sertifikat').value=T.sertifikat;$('tg-unikal').value=T.unikal;$('tg-uspeh').value=T.uspeh;
+  $('tg-vkk').value=T.vkk;$('tg-otkrytost').value=T.otkrytost;$('tg-dohod').value=T.dohod;$('tg-osnash').value=T.osnash;
+  $('th-tekuch').value=TH.tekuch;$('th-vozrast').value=TH.vozrast;$('th-molodye').value=TH.molodye;$('th-noko').value=TH.noko;
+}
+function numInput(id,fallback){var v=parseFloat($(id).value);return isFinite(v)?v:fallback;}
+$('saveTargets').onclick=function(){
+  state.targets={
+    sertifikat:numInput('tg-sertifikat',DEF_TARGETS.sertifikat),
+    unikal:numInput('tg-unikal',DEF_TARGETS.unikal),
+    uspeh:numInput('tg-uspeh',DEF_TARGETS.uspeh),
+    vkk:numInput('tg-vkk',DEF_TARGETS.vkk),
+    otkrytost:numInput('tg-otkrytost',DEF_TARGETS.otkrytost),
+    dohod:numInput('tg-dohod',DEF_TARGETS.dohod),
+    osnash:numInput('tg-osnash',DEF_TARGETS.osnash)
+  };
+  state.thresholds={
+    tekuch:numInput('th-tekuch',DEF_TH.tekuch),
+    vozrast:numInput('th-vozrast',DEF_TH.vozrast),
+    molodye:numInput('th-molodye',DEF_TH.molodye),
+    noko:numInput('th-noko',DEF_TH.noko)
+  };
+  save();renderAll();
+  $('tgStatus').textContent='Сохранено.';
+};
+$('resetTargets').onclick=function(){
+  state.targets=Object.assign({},DEF_TARGETS);
+  state.thresholds=Object.assign({},DEF_TH);
+  save();fillTargetsForm();renderAll();
+  $('tgStatus').textContent='Сброшено к значениям по умолчанию.';
+};
+
+/* ---------- admin: methodology ---------- */
+$('saveMethod').onclick=function(){state.methodology=$('methodText').value;save();$('mStatus').textContent='Сохранено.';};
+$('resetMethod').onclick=function(){state.methodology=DEF_METHOD;$('methodText').value=DEF_METHOD;save();$('mStatus').textContent='Сброшено.';};
+
+/* ---------- empty state ---------- */
+$('emptyAdminBtn').onclick=function(){ if(authed)openAdmin(); else openLogin(); };
+$('emptyDemoBtn').onclick=function(){state=defaultState();save();renderAll();};
+
+/* ---------- filters ---------- */
+$('periodSel').onchange=function(){state.active=this.value;save();renderAll();};
+
+/* ---------- theme & vision ---------- */
+function applyTheme(t){
+  document.documentElement.dataset.theme=t;
+  $('themeBtn').textContent=t==='dark'?'☀':'☾';
+  try{localStorage.setItem(LS_THEME,t);}catch(e){}
+  renderCharts();
+}
+$('themeBtn').onclick=function(){applyTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');};
+function applyLv(on){
+  document.documentElement.classList.toggle('lv',on);
+  $('lvBtn').style.borderColor=on?'var(--accent)':'';
+  try{localStorage.setItem(LS_LV,on?'1':'0');}catch(e){}
+  setTimeout(function(){Object.keys(CH).forEach(function(k){if(CH[k])CH[k].resize();});},120);
+}
+$('lvBtn').onclick=function(){applyLv(!document.documentElement.classList.contains('lv'));};
+
+/* ---------- PDF ---------- */
+$('pdfBtn').onclick=function(){
+  var btn=this;btn.disabled=true;var old=btn.textContent;btn.textContent='Готовим…';
+  Promise.all([loadScript(JSPDF_URL),loadScript(H2C_URL)]).then(async function(){
+    var root=document.documentElement;
+    var prevTheme=root.dataset.theme,prevLv=root.classList.contains('lv');
+    root.dataset.theme='light';root.classList.remove('lv');root.classList.add('pdf-mode');
+    $('themeBtn').textContent='☾';
+    renderCharts();
+    await sleep(450);
+    var node=$('content');
+    var canvas=await html2canvas(node,{scale:1.6,backgroundColor:'#f4f3ef',logging:false});
+    root.dataset.theme=prevTheme;if(prevLv)root.classList.add('lv');root.classList.remove('pdf-mode');
+    $('themeBtn').textContent=prevTheme==='dark'?'☀':'☾';
+    renderCharts();
+    var jsPDF=window.jspdf.jsPDF;
+    var pdf=new jsPDF('p','mm','a4');
+    var pw=210,ph=297,m=7,imgW=pw-2*m;
+    var slicePx=Math.floor(canvas.width*(ph-2*m)/imgW);
+    var y=0,page=0;
+    while(y<canvas.height){
+      var h=Math.min(slicePx,canvas.height-y);
+      var c=document.createElement('canvas');c.width=canvas.width;c.height=h;
+      c.getContext('2d').drawImage(canvas,0,y,canvas.width,h,0,0,canvas.width,h);
+      if(page)pdf.addPage();
+      pdf.addImage(c.toDataURL('image/jpeg',.9),'JPEG',m,m,imgW,h*imgW/canvas.width);
+      y+=h;page++;
+    }
+    pdf.save('dopobrazovanie-chkalovskiy-otchet.pdf');
+    btn.disabled=false;btn.textContent=old;
+  }).catch(function(e){
+    showDiag('PDF: '+(e&&e.message||e));
+    btn.disabled=false;btn.textContent=old;
+  });
+};
+
+/* ---------- reveal & scroll ---------- */
+function observeRv(){
+  if(!('IntersectionObserver' in window)){
+    document.querySelectorAll('.rv').forEach(function(el){el.classList.add('in');});return;
+  }
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.1});
+  document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+}
+addEventListener('scroll',function(){
+  $('hdr').classList.toggle('scrolled',scrollY>60&&innerWidth<=720);
+},{passive:true});
+var _rt=null;
+addEventListener('resize',function(){
+  clearTimeout(_rt);
+  _rt=setTimeout(function(){Object.keys(CH).forEach(function(k){if(CH[k])CH[k].resize();});},150);
+});
+
+/* ---------- init ---------- */
+loadState();
+try{
+  var t=localStorage.getItem(LS_THEME);if(t==='dark')applyTheme('dark');else $('themeBtn').textContent='☾';
+  if(localStorage.getItem(LS_LV)==='1')applyLv(true);
+}catch(e){}
+updateLoginBtn();
+renderAll();
+observeRv();
+loadScript(ECHARTS_URL).then(function(){
+  if(chartsPending){chartsPending=false;renderCharts();}
+}).catch(function(e){showDiag(e.message);});
+</script>
+</body>
+</html>
